@@ -1,5 +1,5 @@
 $(document).on('ready', function(){
-  var socket = io('http://localhost:9090');
+  var socket = io('http://localhost:3030');
   window.app = feathers()
     .configure(feathers.socketio(socket))
     .configure(feathers.hooks())
