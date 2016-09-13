@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>WELCOME TO TEST</title>
+    
+  </head>
+  <body>
+    <main class="container">
+    </main>
+    <script src="//code.jquery.com/jquery-2.2.1.js"></script>
+    <script src="//cdn.rawgit.com/feathersjs/feathers-client/v1.0.0/dist/feathers.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      $(document).on('ready', function(){
+        var socket = io('http://localhost:9090');
+        window.app = feathers()
+          .configure(feathers.socketio(socket))
+          .configure(feathers.hooks())
+          .configure(feathers.authentication({ storage: window.localStorage }));
+        app.authenticate({
+          'type': 'local',
+          'email': "chumheramis@gmail.com",
+          'password': "admin123"
+        }).then(function(result){
+          console.log('Authenticated!', result);
+        }).catch(function(error){
+          console.error('Error authenticating!', error);
+          //alert('Error: ' + error.message);
+        });
+      });
+    </script>
+  </body>
+</html>
